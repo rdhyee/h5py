@@ -25,7 +25,8 @@ from h5py import _objects
 from ._objects import phil, with_phil
 
 if MPI:
-    from mpi4py.mpi_c cimport MPI_Comm, MPI_Info, MPI_Comm_dup, MPI_Info_dup, \
+    # reverse https://github.com/h5py/h5py/commit/bdd573ff73711ccce339a91ac82a058cdd910498
+    from mpi4py.libmpi cimport MPI_Comm, MPI_Info, MPI_Comm_dup, MPI_Info_dup, \
                                MPI_Comm_free, MPI_Info_free
 
 # Initialization

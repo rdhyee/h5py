@@ -169,7 +169,16 @@ DEF SWMR_MIN_HDF5_VERSION = (1,9,178)
         
         # Run Cython
         print("Executing cythonize()")
+
+        # https://github.com/h5py/h5py/issues/532#issuecomment-73631137
+        try:
+            import mpi4py
+            include_path = [mpi4py.get_include(),]
+        except:
+            include_path = []
+
         self.extensions = cythonize(self._make_extensions(config),
+                            include_path=include_path, 
                             force=config.rebuild_required or self.force)
         self.check_rerun_cythonize()
         
